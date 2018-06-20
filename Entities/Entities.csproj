@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3FBC7F58-74CC-41EA-AE70-269837B29F6E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Entities</RootNamespace>
+    <AssemblyName>Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Select.HtmlToPdf, Version=17.3.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Select.HtmlToPdf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\Helper.cs" />
+    <Compile Include="Application\Job.cs" />
+    <Compile Include="Application\Localisation.cs" />
+    <Compile Include="Application\Settings.cs" />
+    <Compile Include="Application\Task.cs" />
+    <Compile Include="Application\User.cs" />
+    <Compile Include="Application\UserGroup.cs" />
+    <Compile Include="DashBoard\Admin.cs" />
+    <Compile Include="Finance\AccountGroup.cs" />
+    <Compile Include="Finance\AccountHeadMaster.cs" />
+    <Compile Include="Finance\AccountOpeningBalance.cs" />
+    <Compile Include="Finance\CostCenter.cs" />
+    <Compile Include="Finance\CustomerReciepts.cs" />
+    <Compile Include="Finance\ExpenseEntry.cs" />
+    <Compile Include="Finance\FinancialTransactions.cs" />
+    <Compile Include="Finance\PurchasePayments.cs" />
+    <Compile Include="Finance\ReportSettings.cs" />
+    <Compile Include="Finance\VoucherEdit.cs" />
+    <Compile Include="Finance\VoucherEntry.cs" />
+    <Compile Include="Finance\VoucherSettings.cs" />
+    <Compile Include="Finance\VoucherType.cs" />
+    <Compile Include="Master\Address.cs" />
+    <Compile Include="Master\Lead.cs" />
+    <Compile Include="Payroll\AdvanceSalary.cs" />
+    <Compile Include="Payroll\Attendance.cs" />
+    <Compile Include="Master\Brand.cs" />
+    <Compile Include="Master\Company.cs" />
+    <Compile Include="Payroll\Department.cs" />
+    <Compile Include="Master\Despatch.cs" />
+    <Compile Include="Payroll\Employee.cs" />
+    <Compile Include="Master\Category.cs" />
+    <Compile Include="Master\Country.cs" />
+    <Compile Include="Master\Currency.cs" />
+    <Compile Include="Master\Customer.cs" />
+    <Compile Include="Payroll\Designation.cs" />
+    <Compile Include="Master\Group.cs" />
+    <Compile Include="Payroll\Holiday.cs" />
+    <Compile Include="Payroll\HourlyTemplate.cs" />
+    <Compile Include="Master\ItemInstance.cs" />
+    <Compile Include="Master\Location.cs" />
+    <Compile Include="Payroll\OfficeShift.cs" />
+    <Compile Include="Payroll\PayRollTemplate.cs" />
+    <Compile Include="Master\Product.cs" />
+    <Compile Include="Master\ProductType.cs" />
+    <Compile Include="Payroll\SalaryComponent.cs" />
+    <Compile Include="Master\State.cs" />
+    <Compile Include="Master\Vehicle.cs" />
+    <Compile Include="OutputMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Master\Supplier.cs" />
+    <Compile Include="Master\Tax.cs" />
+    <Compile Include="Master\UOM.cs" />
+    <Compile Include="Register\CreditNote.cs" />
+    <Compile Include="Register\DebitNote.cs" />
+    <Compile Include="Register\GRNEntryRegister.cs" />
+    <Compile Include="Register\IRegister.cs" />
+    <Compile Include="Register\Item.cs" />
+    <Compile Include="Register\PurchaseEntryRegister.cs" />
+    <Compile Include="Register\PurchaseIndentRegister.cs" />
+    <Compile Include="Register\PurchaseQuoteRegister.cs" />
+    <Compile Include="Register\Reserve.cs" />
+    <Compile Include="Register\SalesDeliveryNote.cs" />
+    <Compile Include="Register\SalesEstimate.cs" />
+    <Compile Include="Register\StockAdjustment.cs" />
+    <Compile Include="Reporting\ReportingNotCreatedException.cs" />
+    <Compile Include="WareHousing\Damage.cs" />
+    <Compile Include="WareHousing\RegisterIn.cs" />
+    <Compile Include="WareHousing\RegisterOut.cs" />
+    <Compile Include="Register\SalesQuoteRegister.cs" />
+    <Compile Include="Register\SalesRequestRegister.cs" />
+    <Compile Include="Register\PurchaseRequestRegister.cs" />
+    <Compile Include="Register\PurchaseReturnRegister.cs" />
+    <Compile Include="Register\Register.cs" />
+    <Compile Include="Register\SalesEntryRegister.cs" />
+    <Compile Include="Register\SalesReturnRegister.cs" />
+    <Compile Include="Register\Scheme.cs" />
+    <Compile Include="Register\OpeningStock.cs" />
+    <Compile Include="Reporting\ReportFilter.cs" />
+    <Compile Include="Reporting\ReportingTool.cs" />
+    <Compile Include="Reporting\ReportSchema.cs" />
+    <Compile Include="Security\BusinessModules.cs" />
+    <Compile Include="Security\Cryptor.cs" />
+    <Compile Include="Security\Modules.cs" />
+    <Compile Include="Security\Permissions.cs" />
+    <Compile Include="Security\PermissionTypes.cs" />
+    <Compile Include="WareHousing\TransferIn.cs" />
+    <Compile Include="WareHousing\TransferOut.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.DBManager\Core.DBManager.csproj">
+      <Project>{ed3c29e2-8ca1-4358-91da-35d8077a0181}</Project>
+      <Name>Core.DBManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="References\Select.Html.dep" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="References\Select.HtmlToPdf.dll" />
+    <Content Include="References\Select.HtmlToPdf.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
