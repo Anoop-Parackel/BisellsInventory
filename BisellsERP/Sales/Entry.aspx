@@ -1531,7 +1531,7 @@
             //lock customer once selected
             $('#ddlCustomer').change(function () {
                 if ($(this).val() != 0) {
-                    $(this).prop('disabled', true);
+                    //$(this).prop('disabled', true);
                 }
             });
 
