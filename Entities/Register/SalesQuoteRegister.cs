@@ -160,7 +160,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.Quantity <= 0)
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Sales Request | Save", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Sales Quote | Save", System.Net.HttpStatusCode.InternalServerError);
                         }
 
                         else
@@ -171,7 +171,7 @@ namespace Entities.Register
                             {
                                 if (!IsNegBillingAllowed.AllowNegativeBilling && prod.Stock < item.Quantity)
                                 {
-                                    return new OutputMessage("Quantity Exceeds", false, Type.Others, "Sales Entry|Save", System.Net.HttpStatusCode.InternalServerError);
+                                    return new OutputMessage("Quantity Exceeds", false, Type.Others, "Sales Quote|Save", System.Net.HttpStatusCode.InternalServerError);
                                 }
                             }
                             if (setting.AllowPriceEditingInSalesOrder)//check for is rate editable in setting
@@ -265,7 +265,7 @@ namespace Entities.Register
             catch (Exception ex)
             {
                 db.RollBackTransaction();
-                return new OutputMessage("Something went wrong.Sales order could not be saved", false, Type.Others, "Sales Request | Save", System.Net.HttpStatusCode.InternalServerError, ex);
+                return new OutputMessage("Something went wrong.Sales order could not be saved", false, Type.Others, "Sales Quote | Save", System.Net.HttpStatusCode.InternalServerError, ex);
             }
             finally
             {
@@ -283,7 +283,7 @@ namespace Entities.Register
 
             if (!Entities.Security.Permissions.AuthorizeUser(this.CreatedBy, Security.BusinessModules.SalesQuote, Security.PermissionTypes.Update))
             {
-                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "SalesQuote | SaveOrUpdate", System.Net.HttpStatusCode.InternalServerError);
+                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "SalesQuote | Update", System.Net.HttpStatusCode.InternalServerError);
             }
             DBManager db = new DBManager();
             try
@@ -369,7 +369,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.Quantity <= 0)
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Sales Request | Update", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Sales Quote | Update", System.Net.HttpStatusCode.InternalServerError);
                         }
                         else
                         {
@@ -379,7 +379,7 @@ namespace Entities.Register
                             {
                                 if (!IsNegBillingAllowed.AllowNegativeBilling && prod.Stock < item.Quantity)
                                 {
-                                    return new OutputMessage("Quantity Exceeds", false, Type.Others, "Sales Entry|Save", System.Net.HttpStatusCode.InternalServerError);
+                                    return new OutputMessage("Quantity Exceeds", false, Type.Others, "Sales Quote|Save", System.Net.HttpStatusCode.InternalServerError);
                                 }
                             }
                             if (setting.AllowPriceEditingInSalesOrder)//check for is rate editable in setting
@@ -487,7 +487,7 @@ namespace Entities.Register
                 {
                     db.RollBackTransaction();
 
-                    return new OutputMessage("Something went wrong. Sales order couldnot be updated", false, Type.Others, "Sales Quote | Update", System.Net.HttpStatusCode.InternalServerError, ex);
+                    return new OutputMessage("Something went wrong. Sales quote couldnot be updated", false, Type.Others, "Sales Quote | Update", System.Net.HttpStatusCode.InternalServerError, ex);
                 }
 
             }
@@ -617,12 +617,12 @@ namespace Entities.Register
 
             if (!Entities.Security.Permissions.AuthorizeUser(this.ModifiedBy, Security.BusinessModules.PurchaseQuote, Security.PermissionTypes.Update))
             {
-                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseQuote | Confirm", System.Net.HttpStatusCode.InternalServerError);
+                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseQuote | ToggleConfirm", System.Net.HttpStatusCode.InternalServerError);
 
             }
             else if (this.ID == 0)
             {
-                return new OutputMessage("Id must not be zero for Confirming", false, Type.RequiredFields, "PurchaseQuote| Confirm", System.Net.HttpStatusCode.InternalServerError);
+                return new OutputMessage("Id must not be zero for Confirming", false, Type.RequiredFields, "PurchaseQuote| ToggleConfirm", System.Net.HttpStatusCode.InternalServerError);
             }
             else
             {
@@ -638,11 +638,11 @@ namespace Entities.Register
                     bool approvedstatus = Convert.ToBoolean(db.ExecuteScalar(CommandType.Text, query));
                     if (approvedstatus)
                     {
-                        return new OutputMessage("Quote Confirmed", true, Type.NoError, "SalesQuote | Confirm", System.Net.HttpStatusCode.OK, true);
+                        return new OutputMessage("Quote Confirmed", true, Type.NoError, "SalesQuote | ToggleConfirm", System.Net.HttpStatusCode.OK, true);
                     }
                     else
                     {
-                        return new OutputMessage("Approval Reverted", true, Type.NoError, "SalesQuote | Confirm", System.Net.HttpStatusCode.OK, false);
+                        return new OutputMessage("Approval Reverted", true, Type.NoError, "SalesQuote | ToggleConfirm", System.Net.HttpStatusCode.OK, false);
                     }
                 }
                 catch (Exception ex)
@@ -650,7 +650,7 @@ namespace Entities.Register
 
 
                     db.Close();
-                    return new OutputMessage("Something went wrong. Try again later", false, Type.RequiredFields, "PurchaseQuote | Confirm", System.Net.HttpStatusCode.InternalServerError, ex);
+                    return new OutputMessage("Something went wrong. Try again later", false, Type.RequiredFields, "SalesQuote | ToggleConfirm", System.Net.HttpStatusCode.InternalServerError, ex);
 
                 }
             }

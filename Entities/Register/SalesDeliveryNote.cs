@@ -154,7 +154,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.Quantity <= 0)
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Sales Request | Save", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "DeliveryNote | Save", System.Net.HttpStatusCode.InternalServerError);
                         }
 
                         else
@@ -248,7 +248,7 @@ namespace Entities.Register
             catch (Exception ex)
             {
                 db.RollBackTransaction();
-                return new OutputMessage("Something went wrong. Delivery note could not be saved", false, Type.Others, "Sales Request | Save", System.Net.HttpStatusCode.InternalServerError, ex);
+                return new OutputMessage("Something went wrong. Delivery note could not be saved", false, Type.Others, "DeliveryNote | Save", System.Net.HttpStatusCode.InternalServerError, ex);
             }
             finally
             {
@@ -350,7 +350,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.Quantity <= 0)
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Sales Request | Update", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "DeliveryNote | Update", System.Net.HttpStatusCode.InternalServerError);
                         }
                         else
                         {

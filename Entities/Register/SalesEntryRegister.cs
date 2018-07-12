@@ -440,7 +440,7 @@ namespace Entities.Register
                             {
                                 if (!IsNegBillingAllowed.AllowNegativeBilling && prod.Stock < item.Quantity)
                                 {
-                                    return new OutputMessage("Quantity Exceeds", false, Type.Others, "Sales Entry|Save", System.Net.HttpStatusCode.InternalServerError);
+                                    return new OutputMessage("Quantity Exceeds", false, Type.Others, "Sales Entry|Update", System.Net.HttpStatusCode.InternalServerError);
                                 }
                             }
                             if (setting.AllowPriceEditingInSalesEntry)//check for is rate editable in setting
@@ -1361,7 +1361,7 @@ namespace Entities.Register
 
                 if (!Entities.Security.Permissions.AuthorizeUser(userId, Security.BusinessModules.PurchaseQuote, Security.PermissionTypes.Update))
                 {
-                    return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseQuote | Update", System.Net.HttpStatusCode.InternalServerError);
+                    return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "SalesEntry | Update", System.Net.HttpStatusCode.InternalServerError);
                 }
                 else if (!toAddress.IsValidEmail())
                 {
