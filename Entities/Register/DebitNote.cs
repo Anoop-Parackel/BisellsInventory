@@ -139,7 +139,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.Quantity <= 0)
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Purchase Entry | Save", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "DebitNote | Save", System.Net.HttpStatusCode.InternalServerError);
                         }
                         else
                         {
@@ -263,7 +263,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.Quantity <= 0)
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Purchase Entry | Save", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "DebitNote | Save", System.Net.HttpStatusCode.InternalServerError);
                         }
                         else
                         {
@@ -629,7 +629,7 @@ namespace Entities.Register
         {
             if (!Entities.Security.Permissions.AuthorizeUser(userId, Security.BusinessModules.PurchaseDebitNote, Security.PermissionTypes.Update))
             {
-                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "DebitNote | Update", System.Net.HttpStatusCode.InternalServerError);
+                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "DebitNote | SendMail", System.Net.HttpStatusCode.InternalServerError);
             }
             else if (!toAddress.IsValidEmail())
             {
@@ -685,11 +685,11 @@ namespace Entities.Register
 
                 };
                 smtp.Send(mail);
-                return new OutputMessage("Mail Send successfully", true, Type.NoError, "Purchase Retrun | Send Mail", System.Net.HttpStatusCode.OK);
+                return new OutputMessage("Mail Send successfully", true, Type.NoError, "DebitNote | Send Mail", System.Net.HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
-                return new OutputMessage("Mail Sending Failed", false, Type.RequiredFields, "Purchase Return | Send Mail", System.Net.HttpStatusCode.InternalServerError, ex);
+                return new OutputMessage("Mail Sending Failed", false, Type.RequiredFields, "DebitNote | Send Mail", System.Net.HttpStatusCode.InternalServerError, ex);
             }
 
         }

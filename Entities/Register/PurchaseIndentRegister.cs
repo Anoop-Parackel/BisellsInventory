@@ -63,7 +63,7 @@ namespace Entities.Register
         {
             if (!Entities.Security.Permissions.AuthorizeUser(this.CreatedBy, Security.BusinessModules.PurchaseIndent, Security.PermissionTypes.Create))
             {
-                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseRequest | Save", System.Net.HttpStatusCode.InternalServerError);
+                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseIndent | Save", System.Net.HttpStatusCode.InternalServerError);
             }
             DBManager db = new DBManager();
             try
@@ -73,18 +73,18 @@ namespace Entities.Register
 
                 if (this.RequestDate.Year < 1900)
                 {
-                    return new OutputMessage("Select a valid date to make a request.", false, Type.Others, "Purchase Request | Save", System.Net.HttpStatusCode.InternalServerError);
+                    return new OutputMessage("Select a valid date to make a request.", false, Type.Others, "PurchaseIndent  | Save", System.Net.HttpStatusCode.InternalServerError);
 
                 }
                 else if (this.DueDate.Year < 1900)
                 {
-                    return new OutputMessage("Select a valid date to make a request.", false, Type.Others, "Purchase Request | Save", System.Net.HttpStatusCode.InternalServerError);
+                    return new OutputMessage("Select a valid date to make a request.", false, Type.Others, "PurchaseIndent | Save", System.Net.HttpStatusCode.InternalServerError);
 
                 }
 
                 else if (this.Products.Count <= 0)
                 {
-                    return new OutputMessage("Select some products to make a request.", false, Type.Others, "Purchase Request | Save", System.Net.HttpStatusCode.InternalServerError);
+                    return new OutputMessage("Select some products to make a request.", false, Type.Others, "PurchaseIndent | Save", System.Net.HttpStatusCode.InternalServerError);
                 }
                 else
                 {
@@ -333,7 +333,7 @@ namespace Entities.Register
                 {
                     db.RollBackTransaction();
 
-                    return new OutputMessage("Something went wrong. Purchase Indent could not be updated", false, Type.Others, "Purchase Request | Update", System.Net.HttpStatusCode.InternalServerError, ex);
+                    return new OutputMessage("Something went wrong. Purchase Indent could not be updated", false, Type.Others, "PurchaseIndent  | Update", System.Net.HttpStatusCode.InternalServerError, ex);
                 }
 
             }
@@ -478,11 +478,11 @@ namespace Entities.Register
                 db.AddParameters(2, "@SupplierCC_Mail", this.SupplierMailCC);
                 db.AddParameters(3, "@SupplierBCC_Mail", this.SupplierMailBCC);
                 db.ExecuteNonQuery(CommandType.Text, query);
-                return new OutputMessage("Mail Send Successfully", true, Type.Others, "Purchase Indent | Save", System.Net.HttpStatusCode.InternalServerError);
+                return new OutputMessage("Mail Send Successfully", true, Type.Others, "Purchase Indent | SendMail", System.Net.HttpStatusCode.InternalServerError);
             }
             catch (Exception ex)
             {
-                return new OutputMessage(ex.Message, false, Type.Others, "Purchase Indent | Save", System.Net.HttpStatusCode.InternalServerError, ex);
+                return new OutputMessage(ex.Message, false, Type.Others, "Purchase Indent | SendMail", System.Net.HttpStatusCode.InternalServerError, ex);
 
             }
             finally
@@ -755,7 +755,7 @@ namespace Entities.Register
             }
             catch (Exception ex)
             {
-                Application.Helper.LogException(ex, "PurchaseRequest |  GetDetails(int LocationID)");
+                Application.Helper.LogException(ex, "PurchaseIndent |  GetDetails(int LocationID)");
                 return null;
             }
             finally

@@ -213,11 +213,11 @@
                                         </div>
                                         <div class="col-xs-2">
                                             <div class="row">
-                                                <div class="btn-group" data-toggle="tooltip" title="Link Sales Orders" data-trigger="hover">
+                                                <%--<div class="btn-group" data-toggle="tooltip" title="Link Sales Orders" data-trigger="hover">
                                                     <button type="button" id="btnLinkPo" class="btn btn-icon btn-warning link-btn">
                                                         <i class="md md-link rot-135"></i>
                                                     </button>
-                                                </div>
+                                                </div>--%>
                                             </div>
                                         </div>
                                     </div>

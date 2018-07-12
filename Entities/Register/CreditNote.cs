@@ -336,7 +336,7 @@ namespace Entities.Register
                     else
                     {
                         db.RollBackTransaction();
-                        return new OutputMessage("Credit note updated successfully", true, Type.Others, "Sales Return | Update", System.Net.HttpStatusCode.InternalServerError, ex);
+                        return new OutputMessage("Credit note updated successfully", true, Type.Others, "CreditNote | Update", System.Net.HttpStatusCode.InternalServerError, ex);
                     }
                 }
                 else
@@ -394,7 +394,7 @@ namespace Entities.Register
                     db.ExecuteNonQuery(CommandType.Text, query);
                     db.CommitTransaction();
                     Entities.Application.Helper.PostFinancials("TBL_SALES_RETURN_REGISTER", this.ID, this.ModifiedBy);
-                    return new OutputMessage("Credit note request has been deleted", true, Type.NoError, "SalesReturn | Delete", System.Net.HttpStatusCode.OK);
+                    return new OutputMessage("Credit note request has been deleted", true, Type.NoError, "CreditNote | Delete", System.Net.HttpStatusCode.OK);
                 }
                 catch (Exception ex)
                 {
@@ -404,18 +404,18 @@ namespace Entities.Register
                         if (Exception.Number == 547)
                         {
                             db.RollBackTransaction();
-                            return new OutputMessage("You cannot delete this entry because it is referenced in other transactions", false, Entities.Type.ForeignKeyViolation, "SalesReturn | Delete", System.Net.HttpStatusCode.InternalServerError, ex);
+                            return new OutputMessage("You cannot delete this entry because it is referenced in other transactions", false, Entities.Type.ForeignKeyViolation, "CreditNote | Delete", System.Net.HttpStatusCode.InternalServerError, ex);
                         }
                         else
                         {
                             db.RollBackTransaction();
-                            return new OutputMessage("Something went wrong. Credit note could not be deleted", false, Type.RequiredFields, "SalesReturn | Delete", System.Net.HttpStatusCode.InternalServerError, ex);
+                            return new OutputMessage("Something went wrong. Credit note could not be deleted", false, Type.RequiredFields, "CreditNote | Delete", System.Net.HttpStatusCode.InternalServerError, ex);
                         }
                     }
                     else
                     {
                         db.RollBackTransaction();
-                        return new OutputMessage("Something went wrong. Credit note could not be deleted", false, Type.Others, "SalesReturn | Delete", System.Net.HttpStatusCode.InternalServerError, ex);
+                        return new OutputMessage("Something went wrong. Credit note could not be deleted", false, Type.Others, "CreditNote | Delete", System.Net.HttpStatusCode.InternalServerError, ex);
                     }
                 }
                 finally
@@ -681,7 +681,7 @@ namespace Entities.Register
             }
             catch (Exception ex)
             {
-                Application.Helper.LogException(ex, "SalesReturn | GetDetails(int Id,int LocationId)");
+                Application.Helper.LogException(ex, "CreditNote | GetDetails(int Id,int LocationId)");
                 return null;
             }
             finally

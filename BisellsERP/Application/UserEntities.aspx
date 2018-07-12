@@ -212,7 +212,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="control-label col-sm-4">Email</label>
+                                                        <label class="control-label col-sm-4">Email/User Name</label>
                                                         <div class="col-sm-8">
                                                             <asp:TextBox ID="txtUserEmail" required="true" data-validation="email" data-validation-error-msg="<small style='color:red'>Invalid Email Format</small>" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:TextBox>
                                                         </div>
@@ -231,6 +231,12 @@
                                                             <asp:DropDownList runat="server" class="form-control input-sm" ID="ddlEmpolyee" ClientIDMode="Static">
                                                                 <asp:ListItem Value="0">--Select--</asp:ListItem>
                                                             </asp:DropDownList>
+                                                        </div>
+                                                    </div>
+                                                      <div class="form-group password">
+                                                        <label class="control-label col-sm-4">Current Password</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="password" id="txtCurrentPassword" required="required" class="form-control input-sm" />
                                                         </div>
                                                     </div>
                                                     <div class="form-group password">
@@ -437,13 +443,19 @@
                     </div>
                     <div class="modal-body p-b-0">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label"> Current Password</label>
+                                    <input type="password" id="txtNewPassword0" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="control-label">Password</label>
                                     <input type="password" id="txtNewPassword" class="form-control" />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label class="control-label">Confirm Password</label>
                                     <input type="password" id="txtNewPassword1" class="form-control" />
@@ -963,9 +975,11 @@
                 $('#PasswordModal').modal('show');
             });
 
-            $('#btnUpdatePassword').click(function(){
-                var newPassword=$('#txtNewPassword').val();
-                var RePassword=$('#txtNewPassword1').val();
+            $('#btnUpdatePassword').click(function () {
+                var currentpassword = $('#txtNewPassword0').val();
+                var newPassword=$('#txtNewPassword').val();   
+                var RePassword = $('#txtNewPassword1').val     
+
                 //console.log($('#hdnUserID').val()+ ' '+newPassword +' '+RePassword);
                 var User = {};
                 User.Password = $('#txtNewPassword').val();
@@ -973,41 +987,46 @@
                 User.ModifiedBy = $.cookie('bsl_3');
                 if ($('#txtNewPassword').val().length >= 8 && $('#txtNewPassword').val().length <= 16) {
                     if (newPassword == RePassword) {
-                        $.ajax({
-                            url: apirul + 'api/Users/Updatepassword',
-                            method: 'POST',
-                            dataType: 'JSON',
-                            data: JSON.stringify(User),
-                            contentType: 'application/json;charset=utf-8',
-                            success: function (data) {
-                                if (data.Success) {
-                                    $('#PasswordModal').modal('hide');
-                                    $('#btnResetPassword').addClass('hidden');
-                                    $('#btnAddUser').html('Save');
-                                    $('#hdnUserID').val("0");
-                                    $('.password').removeClass('hidden');
-                                    successAlert(data.Message);
-                                    reset();
-                                    RefeshTableUser();
-                                }
-                                else {
+                        if (currentpassword != txtUserNameMst) {
+                            $.ajax({
+                                url: apirul + 'api/Users/Updatepassword',
+                                method: 'POST',
+                                dataType: 'JSON',
+                                data: JSON.stringify(User),
+                                contentType: 'application/json;charset=utf-8',
+                                success: function (data) {
+                                    if (data.Success) {
+                                        $('#PasswordModal').modal('hide');
+                                        $('#btnResetPassword').addClass('hidden');
+                                        $('#btnAddUser').html('Save');
+                                        $('#hdnUserID').val("0");
+                                        $('.password').removeClass('hidden');
+                                        successAlert(data.Message);
+                                        reset();
+                                        RefeshTableUser();
+                                    }
+                                    else {
+                                        errorAlert(data.Message);
+                                    }
+                                },
+                                error: function (xhr) {
                                     errorAlert(data.Message);
                                 }
-                            },
-                            error: function (xhr) {
-                                errorAlert(data.Message);
-                            }
-                        });
+                            });
+                        }
+                        else {
+                            errorAlert("Passwords doesn't match");
+                        }
                     }
                     else {
-                        errorAlert("Passwords doesn't match");
+                        errorAlert('Password should be in between 8 and 16 characters length');
                     }
+
                 }
                 else {
-                    errorAlert('Password should be in between 8 and 16 characters length');
+                    errorAlert('Current Password is not matched the username');
                 }
             });
-
             $('.refresh-data').click(function () {
                 RefreshRegister();
             });

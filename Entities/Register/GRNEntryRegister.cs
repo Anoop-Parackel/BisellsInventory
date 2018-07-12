@@ -140,7 +140,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.ModifiedQuantity < 0)//if the recieved qty is less than zero
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Purchase Entry | Save", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "GRN Entry | Save", System.Net.HttpStatusCode.InternalServerError);
                         }
                         else
                         {
@@ -217,7 +217,7 @@ namespace Entities.Register
                 db.CommitTransaction();
                 Entities.Application.Helper.PostFinancials("TBL_PURCHASE_ENTRY_REGISTER", identity, this.CreatedBy);
                 DataTable dt = db.ExecuteQuery(CommandType.Text, "select EntryNumber[Saved_No],[dbo].UDF_Generate_Sales_Bill(" + this.CompanyId + ",'" + this.FinancialYear + "','GRN')[New_Order],GRN_ID from TBL_GRN_REGISTER where GRN_ID=" + identity);
-                return new OutputMessage("GRN registered successfully as " + dt.Rows[0]["Saved_No"].ToString(), true, Type.NoError, "Purchase Entry | Save", System.Net.HttpStatusCode.OK, new { OrderNo = dt.Rows[0]["New_Order"].ToString(), Id = dt.Rows[0]["GRN_ID"] });
+                return new OutputMessage("GRN registered successfully as " + dt.Rows[0]["Saved_No"].ToString(), true, Type.NoError, "GRN Entry| Save", System.Net.HttpStatusCode.OK, new { OrderNo = dt.Rows[0]["New_Order"].ToString(), Id = dt.Rows[0]["GRN_ID"] });
             }
             catch (Exception ex)
             {
@@ -308,7 +308,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.ModifiedQuantity <= 0)
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Purchase Entry | Save", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "GRN Entry | Update", System.Net.HttpStatusCode.InternalServerError);
                         }
                         else
                         {
@@ -395,7 +395,7 @@ namespace Entities.Register
                     {
                         db.RollBackTransaction();
 
-                        return new OutputMessage("You cannot Update this Entry because it is referenced in other transactions", false, Entities.Type.ForeignKeyViolation, "PurchaseEntry | Update", System.Net.HttpStatusCode.InternalServerError, ex);
+                        return new OutputMessage("You cannot Update this Entry because it is referenced in other transactions", false, Entities.Type.ForeignKeyViolation, "GRN Entry | Update", System.Net.HttpStatusCode.InternalServerError, ex);
                     }
                     else
                     {
@@ -493,7 +493,7 @@ namespace Entities.Register
             }
             catch (Exception ex)
             {
-                Application.Helper.LogException(ex, "PurchaseQuote | GetDetailsForConfirm(int LocationId)");
+                Application.Helper.LogException(ex, "GRN Entry | GetDetailsForConfirm(int LocationId)");
                 return null;
             }
             finally
@@ -670,7 +670,7 @@ namespace Entities.Register
             }
             catch (Exception ex)
             {
-                Application.Helper.LogException(ex, "PurchaseQuote | GetDetails(int LocationId)");
+                Application.Helper.LogException(ex, "GRN Entry | GetDetails(int LocationId)");
                 return null;
             }
             finally
@@ -785,7 +785,7 @@ namespace Entities.Register
             }
             catch (Exception ex)
             {
-                Application.Helper.LogException(ex, "PurchaseEntry | GetDetails(int Id,int LocationId)");
+                Application.Helper.LogException(ex, "GRN Entry | GetDetails(int Id,int LocationId)");
                 return null;
             }
         }

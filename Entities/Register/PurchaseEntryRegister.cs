@@ -393,7 +393,7 @@ namespace Entities.Register
                         //Product wise Validations. Use ladder-if after this "if" for more validations
                         if (item.Quantity <= 0)
                         {
-                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Purchase Quote | Save", System.Net.HttpStatusCode.InternalServerError);
+                            return new OutputMessage("Some of the selected Products have a quantity less than or equal to zero. Please revert and try again", false, Type.Others, "Purchase Entry | Update ", System.Net.HttpStatusCode.InternalServerError);
                         }
                         else
                         {

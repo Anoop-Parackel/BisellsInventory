@@ -543,7 +543,7 @@ namespace Entities.Register
                                 else
                                 {
                                     db.RollBackTransaction();
-                                    return new OutputMessage("Something went wrong. Try again later", false, Type.Others, "PurchaseQuote|Save", System.Net.HttpStatusCode.InternalServerError);
+                                    return new OutputMessage("Something went wrong. Try again later", false, Type.Others, "PurchaseQuote|BulkSave", System.Net.HttpStatusCode.InternalServerError);
                                 }
                             }
 
@@ -556,14 +556,14 @@ namespace Entities.Register
                         }
                     }
                     db.CommitTransaction();
-                    return new OutputMessage("Purchase Orders created successfully ", true, Type.NoError, "PurchaseQuote|Save", System.Net.HttpStatusCode.OK);
+                    return new OutputMessage("Purchase Orders created successfully ", true, Type.NoError, "PurchaseQuote|BulkSave", System.Net.HttpStatusCode.OK);
                 }
             }
             catch (Exception ex)
             {
                 db.RollBackTransaction();
 
-                return new OutputMessage("Something went wrong. Try again later", false, Type.Others, "PurchaseQuote|Save", System.Net.HttpStatusCode.InternalServerError, ex.Message);
+                return new OutputMessage("Something went wrong. Try again later", false, Type.Others, "PurchaseQuote|BulkSave", System.Net.HttpStatusCode.InternalServerError, ex.Message);
             }
             finally
             {
@@ -581,16 +581,16 @@ namespace Entities.Register
             {
                 if (!Security.Permissions.AuthorizeUser((int)Registers.CreatedBy, Security.BusinessModules.PurchaseQuoteBuilder, Security.PermissionTypes.Create))
                 {
-                    return new OutputMessage("Insufficient Privilege. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseQuote|Bulk Save", System.Net.HttpStatusCode.InternalServerError);
+                    return new OutputMessage("Insufficient Privilege. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseQuote|BulkSaveFromIndent", System.Net.HttpStatusCode.InternalServerError);
                 }
 
                 else if (Registers.Qoutes.Count == 0)
                 {
-                    return new OutputMessage("Build a quote to save", false, Type.RequiredFields, "PurchaseQuote|Save", System.Net.HttpStatusCode.InternalServerError);
+                    return new OutputMessage("Build a quote to save", false, Type.RequiredFields, "PurchaseQuote|BulkSaveFromIndent", System.Net.HttpStatusCode.InternalServerError);
                 }
                 else if (((DateTime)Registers.EntryDate).Year < 1900)
                 {
-                    return new OutputMessage("Entry date is invalid", false, Type.RequiredFields, "PurchaseQuote|Save", System.Net.HttpStatusCode.InternalServerError);
+                    return new OutputMessage("Entry date is invalid", false, Type.RequiredFields, "PurchaseQuote|BulkSaveFromIndent", System.Net.HttpStatusCode.InternalServerError);
 
                 }
                 else
@@ -698,14 +698,14 @@ namespace Entities.Register
                         }
                     }
                     db.CommitTransaction();
-                    return new OutputMessage("Purchase Orders created successfully ", true, Type.NoError, "PurchaseQuote|Save", System.Net.HttpStatusCode.OK);
+                    return new OutputMessage("Purchase Orders created successfully ", true, Type.NoError, "PurchaseQuote|BulkSaveFromIndent", System.Net.HttpStatusCode.OK);
                 }
             }
             catch (Exception ex)
             {
                 db.RollBackTransaction();
 
-                return new OutputMessage("Something went wrong. Try again later", false, Type.Others, "PurchaseQuote|Save", System.Net.HttpStatusCode.InternalServerError, ex.Message);
+                return new OutputMessage("Something went wrong. Try again later", false, Type.Others, "PurchaseQuote|BulkSaveFromIndent", System.Net.HttpStatusCode.InternalServerError, ex.Message);
             }
             finally
             {
@@ -761,12 +761,12 @@ namespace Entities.Register
 
             if (!Entities.Security.Permissions.AuthorizeUser(this.ModifiedBy, Security.BusinessModules.PurchaseQuote, Security.PermissionTypes.Update))
             {
-                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseQuote | Confirm", System.Net.HttpStatusCode.InternalServerError);
+                return new OutputMessage("Limited Access. Contact Administrator", false, Type.InsufficientPrivilege, "PurchaseQuote | ToggleConfirm", System.Net.HttpStatusCode.InternalServerError);
 
             }
             else if (this.ID == 0)
             {
-                return new OutputMessage("Id must not be zero for Confirming", false, Type.RequiredFields, "PurchaseQuote| Confirm", System.Net.HttpStatusCode.InternalServerError);
+                return new OutputMessage("Id must not be zero for Confirming", false, Type.RequiredFields, "PurchaseQuote| ToggleConfirm", System.Net.HttpStatusCode.InternalServerError);
             }
             else
             {
@@ -782,11 +782,11 @@ namespace Entities.Register
                     bool approvedstatus = Convert.ToBoolean(db.ExecuteScalar(CommandType.Text, query));
                     if (approvedstatus)
                     {
-                        return new OutputMessage("Quote confirmed successfully ", true, Type.NoError, "PurchaseQuote | Confirm", System.Net.HttpStatusCode.OK, true);
+                        return new OutputMessage("Quote confirmed successfully ", true, Type.NoError, "PurchaseQuote | ToggleConfirm", System.Net.HttpStatusCode.OK, true);
                     }
                     else
                     {
-                        return new OutputMessage("Approval Reverted", true, Type.NoError, "PurchaseQuote | Confirm", System.Net.HttpStatusCode.OK, false);
+                        return new OutputMessage("Approval Reverted", true, Type.NoError, "PurchaseQuote | ToggleConfirm", System.Net.HttpStatusCode.OK, false);
                     }
                 }
                 catch (Exception ex)
@@ -794,7 +794,7 @@ namespace Entities.Register
 
 
                     db.Close();
-                    return new OutputMessage("Something went wrong. Try again later", false, Type.RequiredFields, "PurchaseQuote | Confirm", System.Net.HttpStatusCode.InternalServerError, ex);
+                    return new OutputMessage("Something went wrong. Try again later", false, Type.RequiredFields, "PurchaseQuote | ToggleConfirm", System.Net.HttpStatusCode.InternalServerError, ex);
 
                 }
             }
