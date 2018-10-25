@@ -511,13 +511,18 @@ namespace Entities.Finance
                             }
                             if (Convert.ToString(row["AccountID"]) != "0")
                             {
-                                if (Convert.ToString(row["AccountID"]) == "2")
+                                if (Convert.ToString(row["AccountID"]) == "2" || Convert.ToString(row["AccountID"]) == "1" )
                                 {
                                     strGridData.Append("<td><a title='" + Convert.ToString(row["TransDesc"]) + "' class='hyperLinks' href='../Sales/Entry?UID=" + Convert.ToString(row["GroupId"]) + "&MODE=edit'>" + Desc + "</a></td>");
                                 }
+                                else if(Convert.ToString(row["AccountID"]) == "8" || Convert.ToString(row["AccountID"]) == "7")
+                                {
+                                    string a = Convert.ToString(row["AccountID"]);
+                                    strGridData.Append("<td><a title='" + Convert.ToString(row["TransDesc"]) + "' class='hyperLinks' href='../Purchase/Entry?UID=" + Convert.ToString(row["GroupId"]) + "&MODE=edit'>" + Desc + "</a></td>");
+                                }
                                 else
                                 {
-                                    strGridData.Append("<td><a title='" + Convert.ToString(row["TransDesc"]) + "' class='hyperLinks' href='../Purchase/Entry?UID=" + Convert.ToString(row["GroupId"]) + "&MODE=edit'>" + Desc + "</a></td>");
+                                    strGridData.Append("<td><a title='" + Convert.ToString(row["TransDesc"]) + "' class='hyperLinks' href='../Finance/Journal?ID=" + Convert.ToString(row["GroupId"]) + "'>" + Desc + "</a></td>");
                                 }
                             }
                             else
